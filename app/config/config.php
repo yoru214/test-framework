@@ -1,6 +1,6 @@
 <?php
 
-    $config["routes"]["default"]=array("controller"=>"home");
+    $config["routes"]["default"]=array("controller"=>"product");
 
 
-    $config["database"]["default"]=array("host"=>"localhost","username"=>"root","password"=>"root","port"=>"3306");
+    $config["database"]["default"]=array("host"=>"db","username"=>"root","password"=>"root","database"=>"testdb","port"=>"3306");

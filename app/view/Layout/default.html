@@ -1,8 +1,43 @@
 <html>
     <head>
         <title>{{PAGE_TITLE}}</title>
+        <link rel="stylesheet" href="/resources/css/style.css" />
+        <style>
+            
+        </style>
     </head>
     <body>
-        {{PAGE_CONTENT}}
+        <header>
+            <div class="container">
+            <nav>
+                <a href="/" class="pull-left">
+                    <h1>MyStore</h1>
+                </a>
+                <div class="clearfix">
+            </nav>
+            <div>
+        </header>
+        <div class="container">
+            <main>
+                {{PAGE_CONTENT}}
+            </main>
+            <aside>
+                {{SIDEBAR_CONTENT}}
+            </aside>
+        </div>
+        <footer>
+            
+        </footer>
+        <script src="/resources/js/functions.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            window.onload = function(){
+                loadCart();
+                cartQuantityEvent();
+                cartEvents();
+                checkout("checkout-form");
+                loadRate();
+            }
+        </script>
+
     </body>
 </html>

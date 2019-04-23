@@ -1,0 +1,30 @@
+<h3>{{Name}}</h3>
+<div class="col col-4">
+    <img src="{{Image}}" alt="{{Name}}" />
+</div>
+<div class="col col-2">
+    <h4>Description</h4>
+    <p>{{Content}}</p>
+    <form method="POST" action="/?route=purchase/addToCart" class="cart-forms-add">
+    <div class="add-cart-quantity">
+        <input type="hidden" name="product_id" value="{{ProductID}}">
+        <button class="quantity-subtract" type="button">-</button>
+        <input  class="quantity-number" name="qty" type="number" value=1 />
+        <button class="quantity-add" type="button">+</button>
+        <button class="product-add-cart">Add to Cart</button>
+    </div>
+    </form>
+    <div class="rating">
+        <form method="POST"  class="rate-product">
+        <input type="hidden" name="rating" value="1">
+        <input type="hidden" name="product_id" value="{{ProductID}}">
+        <h3 style="text-align: center">
+        {{AVGRATE}}
+        </h3>
+        <div class="empty"></div>
+        <button class="rate" style="width:{{Rating}}px;"></button>
+        {{RATEDIV}}
+        </form>
+    </div>
+    
+</div>

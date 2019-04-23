@@ -2,15 +2,31 @@ version: "3"
   
 services:
   app:
-      image: php:7.2-apache
-      volumes:
-        - .:/var/www/html
-      hostname: web.local
-      ports:
-        - 80:80
-        - 443:443
-      networks:
-        - back
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    hostname: web.local
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - back
+
+  db:
+    image: mysql:5.7
+    volumes:
+       - ./db_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: testdb
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306 
+    networks:
+      - back
     
 
 networks:

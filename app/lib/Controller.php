@@ -5,9 +5,18 @@ class Controller
     var $PAGE_TITLE;
     var $VIEW_VARIABLES;
     var $db;
+    var $VIEW = true;
+    var $Session;
+    var $Authenticate;
+    function __construct()
+    {
+    }
+
     function loadModel($ModelName,$ModelClass=null)
     {
-
+        $ModelFile = APP . '/model/'.ucfirst($ModelName).'.php';
+        require_once $ModelFile;
+        $this->$ModelName = new $ModelName();;
     }
 
     function loadDatabase($name="default",$value=array())

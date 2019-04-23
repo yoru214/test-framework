@@ -1,11 +1,16 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require_once CONFIG . '/config.php';
 
 
 require_once LIB . '/Controller.php';
+require_once LIB . '/Model.php';
 require_once LIB . '/Database.php';
 
 require_once APP . '/controller/AppController.php';
+require_once APP . '/model/AppModel.php';
 
 class Bootloader
 {
@@ -15,6 +20,7 @@ class Bootloader
 
     var $PAGE_TITLE = "";
     var $PAGE_CONTENT = "";
+    var $SIDEBAR_CONTENT = "";
 
 
     var $Layout = "";
@@ -61,7 +67,6 @@ class Bootloader
         $ControllerClass = ucfirst($this->route['controller']).'Controller';
         $Controller = new $ControllerClass();
         $Controller->ROUTE_SEGMENTS = $this->segment;
-        
         foreach($this->databases as $database=>$value)
         {
             $Controller->loadDatabase($database,$value);
@@ -83,13 +88,14 @@ class Bootloader
 
         $this->defineVariables($Controller);
 
-        $this->loadView();
-        $this->setViewVariables();
-
-        $this->loadLayout();
-        $this->setLayoutVariables();
-
-        $this->displayLayout();
+        if($Controller->VIEW)
+        {
+            $this->loadView();
+            $this->loadLayout();
+            $this->setViewVariables();
+            $this->setLayoutVariables();
+            $this->displayLayout();
+        }
     }
 
     function defineVariables($Controller)
@@ -116,12 +122,29 @@ class Bootloader
         $ViewFilePATH = APP . '/view/Layout/default.html';
         $ViewFile = fopen($ViewFilePATH, "r");
         $this->Layout = fread($ViewFile, filesize($ViewFilePATH));
+
+        
+        $ViewFilePATH = APP . '/view/Layout/Segments/sidebar.html';
+        $ViewFile = fopen($ViewFilePATH, "r");
+        $filesize = filesize($ViewFilePATH);
+        if($filesize == 0)
+        {
+            $this->SIDEBAR_CONTENT = "";
+        }
+        else
+        {
+            $this->SIDEBAR_CONTENT = fread($ViewFile, filesize($ViewFilePATH));
+        }
+
+
+
     }
 
     function setLayoutVariables()
     {
         $this->Layout = str_replace("{{PAGE_TITLE}}",$this->PAGE_TITLE,$this->Layout);
         $this->Layout = str_replace("{{PAGE_CONTENT}}",$this->PAGE_CONTENT,$this->Layout);
+        $this->Layout = str_replace("{{SIDEBAR_CONTENT}}",$this->SIDEBAR_CONTENT,$this->Layout);
     }
 
     function loadView()
@@ -130,7 +153,15 @@ class Bootloader
         if(file_exists($ViewFilePATH))
         {
             $ViewFile = fopen($ViewFilePATH, "r");
-            $this->PAGE_CONTENT = fread($ViewFile, filesize($ViewFilePATH));
+            $filesize = filesize($ViewFilePATH);
+            if($filesize == 0)
+            {
+                $this->PAGE_CONTENT = "";
+            }
+            else
+            {
+                $this->PAGE_CONTENT = fread($ViewFile, filesize($ViewFilePATH));
+            }
             
             
             
@@ -147,6 +178,7 @@ class Bootloader
             foreach($this->VIEW_VARIABLES as $variable => $value)
             {
                 $this->PAGE_CONTENT = str_replace("{{".$variable."}}",$value,$this->PAGE_CONTENT);
+                $this->SIDEBAR_CONTENT = str_replace("{{".$variable."}}",$value,$this->SIDEBAR_CONTENT);
             }
         }
     }
