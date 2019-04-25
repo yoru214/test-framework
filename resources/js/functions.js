@@ -264,8 +264,12 @@ function checkout(id)
                     {
                         if (xhr.readyState === XMLHttpRequest.DONE) {
                             if (xhr.status === 200) {
-                                loadCart();
-                                alert("Purchase Sucessfull!");
+                                var resp =JSON.parse(xhr.responseText);
+                                if(resp.CODE == 1)
+                                {
+                                    loadCart();
+                                }
+                                alert(resp.MESSAGE);
                             } else {
                             }
                         }

@@ -32,7 +32,7 @@ class PurchaseController extends AppController
     function checkout()
     {
         $this->VIEW = false;
-        $this->Purchase->purchaseFromCart($_POST['shipping']);
+        echo json_encode($this->Purchase->purchaseFromCart($_POST['shipping']));
         
     }
 }
