@@ -136,12 +136,13 @@ ul.product-list li img
 button.rate
 {
     border: none;
-    margin-top: -60px;
     height: 30px;
     width: 125px;
     background-image: url("https://i1.wp.com/dangerouslyfit.tv/wp-content/plugins/video-krakken/assets/images/star.png?zoom=2.625&w=660");
     cursor: pointer;
-    padding:0px;
+    padding:0px;    
+	top: -30px;
+    position: relative;
 }
 
 
