@@ -1,16 +1,31 @@
 <?php
+spl_autoload_register(function($className) {
+    if(file_exists( APP . '/'. $className . '.php'))
+    {
+        require_once  APP . '/' . $className . '.php';
+    }
+    else if(file_exists( LIB . '/' .$className . '.php'))
+    {
+        require_once LIB . '/'  . $className . '.php';
+    }
+    else if(file_exists( APP . '/controller/' .$className . '.php'))
+    {
+        require_once APP . '/controller/'  . $className . '.php';
+    }
+    else if(file_exists( APP . '/model/' .$className . '.php'))
+    {
+        require_once APP . '/model/'  . $className . '.php';
+    }
+});
+
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require_once CONFIG . '/config.php';
+
+ require_once CONFIG . '/config.php';
 
 
-require_once LIB . '/Controller.php';
-require_once LIB . '/Model.php';
-require_once LIB . '/Database.php';
-
-require_once APP . '/controller/AppController.php';
-require_once APP . '/model/AppModel.php';
 
 class Bootloader
 {
@@ -27,13 +42,13 @@ class Bootloader
     
     var $VIEW_VARIABLES = array();
 
-    function __construct($config)
+    function __construct(array $config)
     {
         $this->initialize($config);
         $this->loadController();
     }
 
-    function initialize($config)
+    function initialize(array $config)
     {
         if(isset($_GET['route']) && $_GET['route']!='')
         {
@@ -62,8 +77,6 @@ class Bootloader
 
     function loadController()
     {
-        $ControllerFile = APP . '/controller/'.ucfirst($this->route['controller']).'Controller.php';
-        require_once $ControllerFile;
         $ControllerClass = ucfirst($this->route['controller']).'Controller';
         $Controller = new $ControllerClass();
         $Controller->ROUTE_SEGMENTS = $this->segment;
@@ -98,7 +111,7 @@ class Bootloader
         }
     }
 
-    function defineVariables($Controller)
+    function defineVariables(Object $Controller)
     {
         if(isset($Controller->PAGE_TITLE))
         {

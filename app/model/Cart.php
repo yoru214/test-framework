@@ -1,7 +1,7 @@
 <?php
 class Cart extends AppModel
 {
-   function getCustomerCart($customerID)
+   function getCustomerCart(int $customerID)
    {
         $sql = "SELECT c.*, p.name, p.price, p.image, (p.price * c.quantity) AS 'subtotal', (SELECT (c.`funds` - SUM(IFNULL((p.price * p.quantity),0))) AS 'funds'  FROM customers c LEFT JOIN purchases p ON p.`customer_id` = c.id  WHERE c.id = " . $customerID . ") AS 'funds'  FROM carts c INNER JOIN products p ON p.`id` = c.product_id INNER JOIN customers cu ON cu.id = c.customer_id   WHERE c.customer_id = " .$customerID;
         $result = $this->query($sql);
@@ -33,7 +33,7 @@ class Cart extends AppModel
         return $object;
    }
 
-   function addToCart($customerID,$cartData)
+   function addToCart(int $customerID,array $cartData)
    {
         $args = array("conditions"=>array("customer_id"=>$customerID,"product_id"=>$cartData['product_id']));
         $res = $this->find($args);
@@ -47,7 +47,7 @@ class Cart extends AppModel
         $this->query($sql);
    }
 
-   function removeFromCart($customerID,$cartData)
+   function removeFromCart(int $customerID, array $cartData)
    {
         $args = array("conditions"=>array("customer_id"=>$customerID,"product_id"=>$cartData['product_id']));
         $res = $this->find($args);

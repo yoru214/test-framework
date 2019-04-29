@@ -12,7 +12,7 @@ class Database
 
     var $ERROR = "";
 
-    function __construct($connection = "default")
+    function __construct(String $connection = "default")
     {
         require APP . '/config/config.php';
         $this->host=$config['database'][$connection]['host'];
@@ -38,7 +38,7 @@ class Database
         return $return;
     }
 
-    function query($queryString)
+    function query(String $queryString)
     {
         $this->DBConnection = new mysqli($this->host, $this->username, $this->password, $this->database);
         return $this->DBConnection->query($queryString);

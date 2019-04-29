@@ -1,7 +1,7 @@
 <?php
 class Rating extends AppModel
 {
-   function getProductRating($productID)
+   function getProductRating(int $productID)
    {
         $sql = "SELECT CAST((IFNULL(AVG(rate),0)) AS DECIMAL(4,2)) AS 'RATE' FROM ratings WHERE product_id = " . $productID;
         $result = $this->query($sql);
@@ -9,7 +9,7 @@ class Rating extends AppModel
         return $row->RATE;
    }
 
-   function rateProduct($productID,$rating)
+   function rateProduct(int $productID,int $rating)
    {
         $args = array('conditions'=>array('user_id'=>$_SESSION['Auth']->id,'product_id'=>$productID));
         $res = $this->find($args);
@@ -25,7 +25,7 @@ class Rating extends AppModel
         }
    }
 
-   function notRated($productID)
+   function notRated(int $productID)
    {
        
         $args = array('conditions'=>array('user_id'=>$_SESSION['Auth']->id,'product_id'=>$productID));

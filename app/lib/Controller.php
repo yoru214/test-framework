@@ -1,4 +1,5 @@
 <?php
+
 class Controller
 {
     var $ROUTE_SEGMENTS = array();
@@ -11,25 +12,26 @@ class Controller
     function __construct()
     {
     }
+    static function load(){
+        return true;
+    }
 
-    function loadModel($ModelName,$ModelClass=null)
+    function loadModel(String $ModelName,String $ModelClass=null)
     {
-        $ModelFile = APP . '/model/'.ucfirst($ModelName).'.php';
-        require_once $ModelFile;
         $this->$ModelName = new $ModelName();;
     }
 
-    function loadDatabase($name="default",$value=array())
+    function loadDatabase(String $name="default",array $value=array())
     {
         $this->db[$name]=$value;
     }
 
-    function set($name,$value)
+    function set(String $name, String $value)
     {
         $this->VIEW_VARIABLES[$name]=$value;
     }
 
-    function segment($i)
+    function segment(int $i)
     {
         if(count($this->ROUTE_SEGMENTS)>($i-1))
         {

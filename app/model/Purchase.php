@@ -1,7 +1,7 @@
 <?php
 class Purchase extends AppModel
 {
-    function purchaseFromCart($shipping)
+    function purchaseFromCart(String $shipping)
     {
         $return = array("CODE"=>"1","MESSAGE"=>"Purchase Successful!");
 

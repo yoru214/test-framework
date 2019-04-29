@@ -15,7 +15,7 @@ class Model
         $this->CONFIG = $config['database'];
     }
 
-    function findAll($arguments = array())
+    function findAll(array $arguments = array())
     {
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -47,7 +47,7 @@ class Model
         }
     }
 
-    function find($arguments = array())
+    function find(array $arguments = array())
     {
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -89,7 +89,7 @@ class Model
         }
     }
 
-    function query($sqlQuery)
+    function query(String $sqlQuery)
     {
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -97,7 +97,7 @@ class Model
         return $this->DBConnection->query($sqlQuery);
     }
 
-    function pluralize($string)
+    function pluralize(String $string)
     {
         $lastChar = substr($string, -1);
 
