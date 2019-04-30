@@ -1,5 +1,5 @@
 <?php
-
+namespace Library;
 class Database
 {
     private $host;
@@ -14,15 +14,17 @@ class Database
 
     function __construct(String $connection = "default")
     {
-        $dbConfig = new Database_Config();
+        $dbConfig = new \Config\Database_Config();
 
         $this->host=$dbConfig->$connection['host'];
         $this->username=$dbConfig->$connection['username'];
         $this->password=$dbConfig->$connection['password'];
         $this->database=$dbConfig->$connection['database'];
-        if(isset($dbConfig->$connection['port'])) {
+        if (isset($dbConfig->$connection['port'])) {
             $this->port=$dbConfig->$connection['port'];
         }
+
+        echo "";
     }
 
     function connect()
@@ -38,9 +40,15 @@ class Database
         return $return;
     }
 
-    function query(String $queryString)
+    function query(String $queryString) 
     {
-        $this->DBConnection = new mysqli($this->host, $this->username, $this->password, $this->database);
+        $this->DBConnection 
+            = new \mysqli(
+                $this->host,
+                $this->username,
+                $this->password, 
+                $this->database
+            );
         return $this->DBConnection->query($queryString);
     }
 

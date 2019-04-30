@@ -1,4 +1,5 @@
 <?php
+namespace Config;
 class Database_Config
 {
     public $default =  array("host"=>"db",

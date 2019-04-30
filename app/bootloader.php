@@ -46,7 +46,7 @@ class Bootloader
 
     function loadController()
     {
-        $ControllerClass = ucfirst($this->route['controller']).'Controller';
+        $ControllerClass = "\\Controller\\".ucfirst($this->route['controller']).'Controller';
         $Controller = new $ControllerClass();
         $Controller->ROUTE_SEGMENTS = $this->segment;
 

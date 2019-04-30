@@ -1,4 +1,5 @@
 <?php
+namespace Controller;
 
 class RatingsController extends AppController
 {

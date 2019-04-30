@@ -20,7 +20,9 @@
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/yoru214/test-framework
  */
-class AppModel extends Model
+
+namespace Model;
+class AppModel extends \Library\Model
 {
     
 }

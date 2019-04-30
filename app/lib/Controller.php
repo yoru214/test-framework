@@ -1,4 +1,5 @@
 <?php
+namespace Library;
 
 class Controller
 {
@@ -20,7 +21,8 @@ class Controller
 
     function loadModel(String $ModelName,String $ModelClass=null)
     {
-        $this->$ModelName = new $ModelName();;
+        $ModelNameSpace = "\\Model\\".$ModelName;
+        $this->$ModelName = new $ModelNameSpace();
     }
 
     function loadDatabase(String $name="default")

@@ -1,6 +1,6 @@
 <?php
-
-class AppController extends Controller
+namespace Controller;
+class AppController extends \Library\Controller
 {
 
  

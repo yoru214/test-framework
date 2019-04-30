@@ -1,4 +1,5 @@
 <?php
+namespace Library;
 class Model
 {
     var $TABLE = "";
@@ -14,7 +15,7 @@ class Model
 
         $config = array();
         
-        $dbConfig = new Database_Config();
+        $dbConfig = new \Config\Database_Config();
         $databases = get_object_vars($dbConfig);
         $config['database']=$databases;
 
@@ -22,7 +23,7 @@ class Model
         $this->CONFIG = $config['database'];
     }
 
-    function findAll(array $arguments = array())
+    function findAll(array $arguments = array()) 
     {
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -36,7 +37,6 @@ class Model
             }   
             $sql = "select * from " . $this->TABLE;
             $result = $this->DBConnection->query($sql);
-
             $object = array();
             while ($row = mysqli_fetch_object($result)) {
                 $object[] = $row;
@@ -51,7 +51,7 @@ class Model
         }
     }
 
-    function find(array $arguments = array())
+    function find(array $arguments = array()) : ?object
     {
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -89,15 +89,15 @@ class Model
         }
     }
 
-    function query(String $sqlQuery)
+    function query(String $sqlQuery) 
     {
-        $this->DBConnection =  new Database($this->DB);
+        $this->DBConnection =  new \Library\Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
 
         return $this->DBConnection->query($sqlQuery);
     }
 
-    function pluralize(String $string)
+    function pluralize(String $string) : String
     {
         $lastChar = substr($string, -1);
 
@@ -109,7 +109,9 @@ class Model
             $string .= "s";
         }
 
-        return $string;
+        $segments = explode("\\", $string);
+
+        return $segments[count($segments)-1];
     }
 }
 
