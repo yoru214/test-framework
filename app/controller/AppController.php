@@ -1,8 +1,11 @@
 <?php
 
 class AppController extends Controller
-{ 
-    public function __construct(){
+{
+
+ 
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -10,8 +13,7 @@ class AppController extends Controller
     {   
         $this->loadModel('Customer');
         $this->loadModel('Shipping');
-        if(!isset($_SESSION['Auth']))
-        {
+        if(!isset($_SESSION['Auth'])) {
             $_SESSION['Auth'] = $this->Customer->add();
         }
         $this->Customer->setFunds();
@@ -22,9 +24,9 @@ class AppController extends Controller
             $shippingHTML .= '<input type="radio" name="shipping" value="'.$shipping->id.'" /> '.$shipping->description;
         }
         
-        $this->set("Buyer",$_SESSION['Auth']->name);
-        $this->set("FUNDS",$_SESSION['Auth']->funds);
-        $this->set("SHIPPING_OPTIONS",$shippingHTML);
+        $this->set("Buyer", $_SESSION['Auth']->name);
+        $this->set("FUNDS", $_SESSION['Auth']->funds);
+        $this->set("SHIPPING_OPTIONS", $shippingHTML);
 
     }
 

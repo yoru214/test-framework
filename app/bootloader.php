@@ -22,11 +22,9 @@ class Bootloader
 
     function initialize(array $config)
     {
-        if(isset($_GET['route']) && $_GET['route']!='')
-        {
-            $this->segment = explode('/', ltrim(rtrim($_GET['route'],'/'),'/'));
-            if(count($this->segment)<2)
-            {
+        if(isset($_GET['route']) && $_GET['route']!='') {
+            $this->segment = explode('/', ltrim(rtrim($_GET['route'], '/'), '/'));
+            if(count($this->segment)<2) {
                 $this->segment[1]='index';
             }
         }
@@ -35,8 +33,7 @@ class Bootloader
             $this->segment[0] = $config['routes']['default']['controller'];
             $this->segment[1] = $config['routes']['default']['action'];
 
-            if(!isset($this->segment[1]))
-            {
+            if(!isset($this->segment[1])) {
                 $this->segment[1]="index";
             }
         }
@@ -55,8 +52,7 @@ class Bootloader
 
         $Controller->beforeFilter();
 
-        if(isset($this->route['action']))
-        {
+        if(isset($this->route['action'])) {
             $Action="".$this->segment[1];
             $Controller->$Action();
 
@@ -69,8 +65,7 @@ class Bootloader
 
         $this->defineVariables($Controller);
 
-        if($Controller->VIEW)
-        {
+        if($Controller->VIEW) {
             $this->loadView();
             $this->loadLayout();
             $this->setViewVariables();
@@ -81,15 +76,13 @@ class Bootloader
 
     function defineVariables(Object $Controller)
     {
-        if(isset($Controller->PAGE_TITLE))
-        {
+        if(isset($Controller->PAGE_TITLE)) {
             $this->PAGE_TITLE = $Controller->PAGE_TITLE;
         }
         else
         {
             $this->PAGE_TITLE = ucfirst($this->route['controller']);
-            if(isset($this->route['action']))
-            {
+            if(isset($this->route['action'])) {
                 $this->PAGE_TITLE .= " &middot; " . ucfirst($this->route['action']);
             }
 
@@ -108,8 +101,7 @@ class Bootloader
         $ViewFilePATH = APP . '/view/Layout/Segments/sidebar.html';
         $ViewFile = fopen($ViewFilePATH, "r");
         $filesize = filesize($ViewFilePATH);
-        if($filesize == 0)
-        {
+        if($filesize == 0) {
             $this->SIDEBAR_CONTENT = "";
         }
         else
@@ -120,20 +112,18 @@ class Bootloader
 
     function setLayoutVariables()
     {
-        $this->Layout = str_replace("{{PAGE_TITLE}}",$this->PAGE_TITLE,$this->Layout);
-        $this->Layout = str_replace("{{PAGE_CONTENT}}",$this->PAGE_CONTENT,$this->Layout);
-        $this->Layout = str_replace("{{SIDEBAR_CONTENT}}",$this->SIDEBAR_CONTENT,$this->Layout);
+        $this->Layout = str_replace("{{PAGE_TITLE}}", $this->PAGE_TITLE, $this->Layout);
+        $this->Layout = str_replace("{{PAGE_CONTENT}}", $this->PAGE_CONTENT, $this->Layout);
+        $this->Layout = str_replace("{{SIDEBAR_CONTENT}}", $this->SIDEBAR_CONTENT, $this->Layout);
     }
 
     function loadView()
     {
         $ViewFilePATH = APP . '/view/' . ucfirst($this->route['controller']). '/'.$this->route['action'].'.html';
-        if(file_exists($ViewFilePATH))
-        {
+        if(file_exists($ViewFilePATH)) {
             $ViewFile = fopen($ViewFilePATH, "r");
             $filesize = filesize($ViewFilePATH);
-            if($filesize == 0)
-            {
+            if($filesize == 0) {
                 $this->PAGE_CONTENT = "";
             }
             else
@@ -151,12 +141,11 @@ class Bootloader
 
     function setViewVariables()
     {
-        if(isset($this->VIEW_VARIABLES))
-        {
+        if(isset($this->VIEW_VARIABLES)) {
             foreach($this->VIEW_VARIABLES as $variable => $value)
             {
-                $this->PAGE_CONTENT = str_replace("{{".$variable."}}",$value,$this->PAGE_CONTENT);
-                $this->SIDEBAR_CONTENT = str_replace("{{".$variable."}}",$value,$this->SIDEBAR_CONTENT);
+                $this->PAGE_CONTENT = str_replace("{{".$variable."}}", $value, $this->PAGE_CONTENT);
+                $this->SIDEBAR_CONTENT = str_replace("{{".$variable."}}", $value, $this->SIDEBAR_CONTENT);
             }
         }
     }

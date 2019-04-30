@@ -123,9 +123,9 @@ class Customer extends AppModel
         Shayla Mcadory,
         Jamika Ress";
 
-        $names = explode(",",$strnames);
+        $names = explode(",", $strnames);
 
-        return trim($names[rand(0,count($names)-1)]);
+        return trim($names[rand(0, count($names)-1)]);
     }
     
 }

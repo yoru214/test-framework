@@ -13,7 +13,8 @@ class Controller
     {
         
     }
-    static function load(){
+    static function load()
+    {
         return true;
     }
 
@@ -35,8 +36,7 @@ class Controller
 
     function segment(int $i)
     {
-        if(count($this->ROUTE_SEGMENTS)>($i-1))
-        {
+        if(count($this->ROUTE_SEGMENTS)>($i-1)) {
             return $this->ROUTE_SEGMENTS[$i];
         }
         else{

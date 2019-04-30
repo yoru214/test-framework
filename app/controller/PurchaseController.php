@@ -22,12 +22,12 @@ class PurchaseController extends AppController
     function addToCart()
     {
         $this->VIEW = false;
-        $this->Cart->addToCart($_SESSION['Auth']->id,$_POST);
+        $this->Cart->addToCart($_SESSION['Auth']->id, $_POST);
     }
     function removeFromCart()
     {
         $this->VIEW = false;
-        $this->Cart->removeFromCart($_SESSION['Auth']->id,$_POST);
+        $this->Cart->removeFromCart($_SESSION['Auth']->id, $_POST);
     }
     function checkout()
     {

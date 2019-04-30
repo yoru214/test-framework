@@ -20,8 +20,7 @@ class Database
         $this->username=$dbConfig->$connection['username'];
         $this->password=$dbConfig->$connection['password'];
         $this->database=$dbConfig->$connection['database'];
-        if(isset($dbConfig->$connection['port']))
-        {
+        if(isset($dbConfig->$connection['port'])) {
             $this->port=$dbConfig->$connection['port'];
         }
     }

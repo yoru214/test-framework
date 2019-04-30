@@ -26,6 +26,6 @@ class ProfileController extends AppController
     {
         $this->VIEW = false;
         unset($_SESSION['Auth']);
-        header('Location: /' );
+        header('Location: /');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-class Model 
+class Model
 {
     var $TABLE = "";
     var $DB = "";
@@ -27,13 +27,10 @@ class Model
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
 
-        if($ConnectionStatus["CODE"]=="1")
-        {
+        if($ConnectionStatus["CODE"]=="1") {
             $where = "";
-            if(count($arguments)>0)
-            {
-                if(isset($arguments['conditions']))
-                {
+            if(count($arguments)>0) {
+                if(isset($arguments['conditions'])) {
                     var_dump($arguments['conditions']);
                 }
             }   
@@ -59,20 +56,16 @@ class Model
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
 
-        if($ConnectionStatus["CODE"]=="1")
-        {
+        if($ConnectionStatus["CODE"]=="1") {
             $sql = "select * from " . $this->TABLE;
             $where = "";
-            if(count($arguments)>0)
-            {
-                if(isset($arguments['conditions']))
-                {
+            if(count($arguments)>0) {
+                if(isset($arguments['conditions'])) {
                     $sql .= " where ";
                     $cnt = 0;
                     foreach($arguments['conditions'] as $field => $value)
                     {
-                        if($cnt>0)
-                        {
+                        if($cnt>0) {
                             $sql .= " AND ";
                         }
                         $sql .= " ";
@@ -108,8 +101,7 @@ class Model
     {
         $lastChar = substr($string, -1);
 
-        if($lastChar == "s")
-        {
+        if($lastChar == "s") {
             $string .= "ses";
         }
         else

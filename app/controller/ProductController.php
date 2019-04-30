@@ -8,9 +8,8 @@ class ProductController extends AppController
         $this->loadModel("Product");
         $this->loadModel("Rating");
 
-        if(isset($_POST['rating']))
-        {
-           $this->Rating->rateProduct($_POST['product_id'],$_POST['rate']);
+        if(isset($_POST['rating'])) {
+            $this->Rating->rateProduct($_POST['product_id'], $_POST['rate']);
            
         }
     }
@@ -34,8 +33,7 @@ class ProductController extends AppController
             $result .= '<h3 style="text-align: center">'.($this->Rating->getProductRating($product->id)).'</h3>';
             $result .= '<div class="empty"></div>';
             $result .= '<button class="rate" style="width:'.($this->Rating->getProductRating($product->id)*30).'px;" type="submit"></button>';
-            if($this->Rating->notRated($product->id))
-            {
+            if($this->Rating->notRated($product->id)) {
                 $result .= '<div>';
                 $result .= '    Rate: ';
                 $result .= '    <select name="rate">';
@@ -70,7 +68,7 @@ class ProductController extends AppController
             $result .= '</li>';
         }
 
-        $this->set("Products",$result);
+        $this->set("Products", $result);
 
     }
 
@@ -84,8 +82,7 @@ class ProductController extends AppController
         $Rating = $this->Rating->getProductRating($product->id);
 
         $ratingHTML ="";
-        if($this->Rating->notRated($product->id))
-        {
+        if($this->Rating->notRated($product->id)) {
             $ratingHTML  = '<div>';
             $ratingHTML .= '    Rate: ';
             $ratingHTML .= '    <select name="rate">';
@@ -99,13 +96,13 @@ class ProductController extends AppController
             $ratingHTML .= '</div>';
         }
 
-        $this->set("ProductID",$product->id);
-        $this->set("Name",$product->name);
-        $this->set("Image",$product->image);
-        $this->set("Content",$product->description);
-        $this->set("AVGRATE",$Rating);
-        $this->set("Rating",$Rating * 30);
-        $this->set("RATEDIV",$ratingHTML);
+        $this->set("ProductID", $product->id);
+        $this->set("Name", $product->name);
+        $this->set("Image", $product->image);
+        $this->set("Content", $product->description);
+        $this->set("AVGRATE", $Rating);
+        $this->set("Rating", $Rating * 30);
+        $this->set("RATEDIV", $ratingHTML);
     }
 
     

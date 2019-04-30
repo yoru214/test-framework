@@ -10,8 +10,7 @@ class Purchase extends AppModel
 
         $row=mysqli_fetch_object($result);
 
-        if($row->funds >= 0)
-        {
+        if($row->funds >= 0) {
 
             $sql = "INSERT INTO purchases SELECT c.*, p.`price`, ".$shipping." as 'shipping' FROM carts c INNER JOIN products p ON p.`id` = c.product_id WHERE c.customer_id = " . $_SESSION['Auth']->id;
             $this->query($sql);
