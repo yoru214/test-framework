@@ -14,14 +14,15 @@ class Database
 
     function __construct(String $connection = "default")
     {
-        require APP . '/config/config.php';
-        $this->host=$config['database'][$connection]['host'];
-        $this->username=$config['database'][$connection]['username'];
-        $this->password=$config['database'][$connection]['password'];
-        $this->database=$config['database'][$connection]['database'];
-        if(isset($config['database'][$connection]['port']))
+        $dbConfig = new Database_Config();
+
+        $this->host=$dbConfig->$connection['host'];
+        $this->username=$dbConfig->$connection['username'];
+        $this->password=$dbConfig->$connection['password'];
+        $this->database=$dbConfig->$connection['database'];
+        if(isset($dbConfig->$connection['port']))
         {
-            $this->port=$config['database'][$connection]['port'];
+            $this->port=$dbConfig->$connection['port'];
         }
     }
 

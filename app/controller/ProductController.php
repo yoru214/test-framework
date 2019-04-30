@@ -83,21 +83,20 @@ class ProductController extends AppController
 
         $Rating = $this->Rating->getProductRating($product->id);
 
-        $result ="";
+        $ratingHTML ="";
         if($this->Rating->notRated($product->id))
         {
-            $result  = '<div>';
-            $result .= '    Rate: ';
-            $result .= '    <select name="rate">';
-            // $result .= '        <option value="0"> - </option>';
-            $result .= '        <option value="1"> 1 </option>';
-            $result .= '        <option value="2"> 2 </option>';
-            $result .= '        <option value="3"> 3 </option>';
-            $result .= '        <option value="4"> 4 </option>';
-            $result .= '        <option value="5"> 5 </option>';
-            $result .= '    </select>';
-            $result .= '    <button>Submit</button>';
-            $result .= '</div>';
+            $ratingHTML  = '<div>';
+            $ratingHTML .= '    Rate: ';
+            $ratingHTML .= '    <select name="rate">';
+            $ratingHTML .= '        <option value="1"> 1 </option>';
+            $ratingHTML .= '        <option value="2"> 2 </option>';
+            $ratingHTML .= '        <option value="3"> 3 </option>';
+            $ratingHTML .= '        <option value="4"> 4 </option>';
+            $ratingHTML .= '        <option value="5"> 5 </option>';
+            $ratingHTML .= '    </select>';
+            $ratingHTML .= '    <button>Submit</button>';
+            $ratingHTML .= '</div>';
         }
 
         $this->set("ProductID",$product->id);
@@ -106,7 +105,7 @@ class ProductController extends AppController
         $this->set("Content",$product->description);
         $this->set("AVGRATE",$Rating);
         $this->set("Rating",$Rating * 30);
-        $this->set("RATEDIV",$result);
+        $this->set("RATEDIV",$ratingHTML);
     }
 
     

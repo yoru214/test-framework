@@ -11,7 +11,14 @@ class Model
     {
         $this->TABLE = $this->pluralize(strtolower(get_class($this)));
         $this->DB = 'default';
-        require APP . '/config/config.php';
+
+        $config = array();
+        
+        $dbConfig = new Database_Config();
+        $databases = get_object_vars($dbConfig);
+        $config['database']=$databases;
+
+
         $this->CONFIG = $config['database'];
     }
 

@@ -11,6 +11,7 @@ class Controller
     var $Authenticate;
     function __construct()
     {
+        
     }
     static function load(){
         return true;
@@ -21,9 +22,10 @@ class Controller
         $this->$ModelName = new $ModelName();;
     }
 
-    function loadDatabase(String $name="default",array $value=array())
+    function loadDatabase(String $name="default")
     {
-        $this->db[$name]=$value;
+        $dbConfig = new Database_Config();
+        $this->db[$name]=$dbConfig->$name;
     }
 
     function set(String $name, String $value)
