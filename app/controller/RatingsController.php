@@ -3,22 +3,22 @@ namespace Controller;
 
 class RatingsController extends AppController
 {
-    function beforeFilter()
+    function beforeFilter() : void
     {
         parent::beforeFilter();
     }
 
-    function index()
+    function index() : void
     {
         $this->PAGE_TITLE = "Ratings";
     }
 
-    function view()
+    function view() : void
     {
         $this->PAGE_TITLE = "Product rating";
     }
 
-    function add()
+    function add() : void
     {
         
     }

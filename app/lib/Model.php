@@ -23,7 +23,7 @@ class Model
         $this->CONFIG = $config['database'];
     }
 
-    function findAll(array $arguments = array()) 
+    function findAll(array $arguments = array()) : ?array
     {
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -36,7 +36,7 @@ class Model
                 }
             }   
             $sql = "select * from " . $this->TABLE;
-            $result = $this->DBConnection->query($sql);
+            $result = $this->DBConnection->result($sql);
             $object = array();
             while ($row = mysqli_fetch_object($result)) {
                 $object[] = $row;
@@ -79,7 +79,7 @@ class Model
 
             $sql .= " limit 1";
 
-            $result = $this->DBConnection->query($sql);
+            $result = $this->DBConnection->result($sql);
             return mysqli_fetch_object($result);
         }
         else
@@ -89,12 +89,19 @@ class Model
         }
     }
 
-    function query(String $sqlQuery) 
+    function result(String $sqlQuery) : ?object
     {
         $this->DBConnection =  new \Library\Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
 
-        return $this->DBConnection->query($sqlQuery);
+        return $this->DBConnection->result($sqlQuery);
+    }
+
+    function query(String $sqlQuery) : void
+    {
+        $this->DBConnection =  new \Library\Database($this->DB);
+        $ConnectionStatus = $this->DBConnection->connect();
+        $this->DBConnection->query($sqlQuery);
     }
 
     function pluralize(String $string) : String

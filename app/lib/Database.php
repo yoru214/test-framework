@@ -40,7 +40,7 @@ class Database
         return $return;
     }
 
-    function query(String $queryString) 
+    function result(String $queryString) : ?object
     {
         $this->DBConnection 
             = new \mysqli(
@@ -50,6 +50,19 @@ class Database
                 $this->database
             );
         return $this->DBConnection->query($queryString);
+    }
+    
+
+    function query(String $queryString) : void
+    {
+        $this->DBConnection 
+            = new \mysqli(
+                $this->host,
+                $this->username,
+                $this->password, 
+                $this->database
+            );
+            $this->DBConnection->query($queryString);
     }
 
 }

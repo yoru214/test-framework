@@ -36,7 +36,7 @@ class Rating extends AppModel
         $sql .= "CAST((IFNULL(AVG(rate),0)) AS DECIMAL(4,2)) AS 'RATE' ";
         $sql .= "FROM ratings ";
         $sql .= "WHERE product_id = " . $productID;
-        $result = $this->query($sql);
+        $result = $this->result($sql);
         $row=mysqli_fetch_object($result);
         return $row->RATE;
     }
@@ -48,7 +48,7 @@ class Rating extends AppModel
      * 
      * @return boolean returns true if rating is sucessful.
      */
-    function rateProduct(int $productID,int $rating) : boolean
+    function rateProduct(int $productID,int $rating) : bool
     {
         $args = array(
                       'conditions'=>array('user_id'=>$_SESSION['Auth']->id,

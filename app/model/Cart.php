@@ -30,7 +30,7 @@ class Cart extends AppModel
      * 
      * @return array list of items on the cart.
      */
-    function getCustomerCart(int $customerID)
+    function getCustomerCart(int $customerID) : ?array
     {
         $sql 
             = "SELECT c.*, 
@@ -48,7 +48,7 @@ class Cart extends AppModel
             INNER JOIN products p ON p.`id` = c.product_id 
             INNER JOIN customers cu ON cu.id = c.customer_id   
             WHERE c.customer_id = " .$customerID;
-        $result = $this->query($sql);
+        $result = $this->result($sql);
 
 
         $object = array();
@@ -56,7 +56,7 @@ class Cart extends AppModel
         $total= 0.00;
         $qty=0;
         $funds = 0;
-        if ($result = $this->query($sql)) {
+        if ($result = $this->result($sql)) {
             while ($row = mysqli_fetch_object($result)) {
                 $items[] = $row;
                 $total += $row->subtotal;
@@ -82,7 +82,7 @@ class Cart extends AppModel
      * 
      * @return void
      */
-    function addToCart(int $customerID,array $cartData)
+    function addToCart(int $customerID,array $cartData) : void
     {
         $args = array(
                     "conditions"=>array("customer_id"=>$customerID,
@@ -100,6 +100,7 @@ class Cart extends AppModel
             $sql .= (intval($res->quantity) + intval($cartData['qty']));
             $sql .= " WHERE id = ".$res->id;
         }
+
         $this->query($sql);
     }
     /**
@@ -110,7 +111,7 @@ class Cart extends AppModel
      * 
      * @return void
      */
-    function removeFromCart(int $customerID, array $cartData)
+    function removeFromCart(int $customerID, array $cartData) : void
     {
         $args = array(
                     "conditions"=>array("customer_id"=>$customerID,

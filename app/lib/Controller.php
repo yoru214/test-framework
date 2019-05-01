@@ -14,10 +14,6 @@ class Controller
     {
         
     }
-    static function load()
-    {
-        return true;
-    }
 
     function loadModel(String $ModelName,String $ModelClass=null)
     {
@@ -36,7 +32,7 @@ class Controller
         $this->VIEW_VARIABLES[$name]=$value;
     }
 
-    function segment(int $i)
+    function segment(int $i) : ?String
     {
         if(count($this->ROUTE_SEGMENTS)>($i-1)) {
             return $this->ROUTE_SEGMENTS[$i];

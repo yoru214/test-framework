@@ -30,7 +30,7 @@ class Purchase extends AppModel
      * 
      * @return array $array['CODE']=1 if succesful.
      */
-    function purchaseFromCart(String $shipping)
+    function purchaseFromCart(String $shipping) : ?array
     {
         $return = array("CODE"=>"1","MESSAGE"=>"Purchase Successful!");
 
@@ -42,7 +42,7 @@ class Purchase extends AppModel
         $sql .= "ON p.id = c.product_id ";
         $sql .= "WHERE c.customer_id = ". $_SESSION['Auth']->id;
         
-        $result = $this->query($sql);
+        $result = $this->result($sql);
 
         $row=mysqli_fetch_object($result);
 

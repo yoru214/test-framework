@@ -3,7 +3,7 @@ namespace Controller;
 
 class ProductController extends AppController
 {
-    function beforeFilter()
+    function beforeFilter() : void
     {
         parent::beforeFilter();
         $this->loadModel("Product");
@@ -15,7 +15,7 @@ class ProductController extends AppController
         }
     }
 
-    function index()
+    function index() : void
     {
         $this->PAGE_TITLE = "MyStore";
 
@@ -73,7 +73,7 @@ class ProductController extends AppController
 
     }
 
-    function view()
+    function view() : void
     {
         $arg = array('conditions'=>array('id'=>$this->segment(2)));
         $product = $this->Product->find($arg);

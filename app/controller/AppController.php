@@ -9,7 +9,7 @@ class AppController extends \Library\Controller
         parent::__construct();
     }
 
-    function beforeFilter()
+    public function beforeFilter() : void
     {   
         $this->loadModel('Customer');
         $this->loadModel('Shipping');
@@ -30,7 +30,7 @@ class AppController extends \Library\Controller
 
     }
 
-    function afterFilter()
+    public function afterFilter() : void
     {
 
     }

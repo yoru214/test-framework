@@ -28,7 +28,7 @@ class Customer extends AppModel
      *
      * @return object 
      */
-    function add()
+    function add() : object
     {
         $name = $this->setname();
         $sql = "insert into customers (name) values('".$name."')";
@@ -42,7 +42,7 @@ class Customer extends AppModel
      *
      * @return void
      */
-    function setFunds()
+    function setFunds() : void
     {
         $sql  = "SELECT ";
         $sql .= "c.id, ";
@@ -50,7 +50,7 @@ class Customer extends AppModel
         $sql .= "FROM customers c ";
         $sql .= "LEFT JOIN purchases p ON p.`customer_id` = c.id  ";
         $sql .= "WHERE c.id = " . $_SESSION['Auth']->id;
-        $result = $this->query($sql);
+        $result = $this->result($sql);
         $row = mysqli_fetch_object($result);
         $_SESSION['Auth']->funds = $row->funds;
     }
@@ -59,7 +59,7 @@ class Customer extends AppModel
      *
      * @return String random persons name
      */
-    function setName()
+    function setName() : String
     {
         $strnames 
             = "Kathleen Weekly,

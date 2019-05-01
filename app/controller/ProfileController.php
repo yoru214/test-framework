@@ -3,18 +3,18 @@ namespace Controller;
 
 class ProfileController extends AppController
 {
-    function beforeFilter()
+    function beforeFilter() : void
     {
         parent::beforeFilter();
     }
 
-    function index()
+    function index() : void
     {
         $this->PAGE_TITLE = "Profile";
 
     }
 
-    function cart()
+    function cart() : void
     {
         $this->VIEW = false;
         $this->loadModel('Cart');
@@ -23,7 +23,7 @@ class ProfileController extends AppController
         
     }
 
-    function logout()
+    function logout() : void
     {
         $this->VIEW = false;
         unset($_SESSION['Auth']);
