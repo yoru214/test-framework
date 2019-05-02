@@ -28,17 +28,18 @@ class ProductController extends AppController
             $result .= '<li class="col-3">';
             $result .= '<img src="'.$product->image.'" alt="'.$product->name.'" />';
             $result .= '<div class="rating">';
-            $result .= '<form method="post"  class="rate-product">';
+            $result .= '<form method="post"  class="rate-product" id="rate-product-'.$product->id.'" onsubmit="return rateProduct(this)">';
             $result .= '<input type="hidden" name="rating" value="1">';
             $result .= '<input type="hidden" name="product_id" value="'.$product->id.'">';
-            $result .= '<h3 style="text-align: center">'.($this->Rating->getProductRating($product->id)).'</h3>';
+            $result .= '<h3 style="text-align: center">'.number_format(($this->Rating->getProductRating($product->id)),2).'</h3>';
             $result .= '<div class="empty"></div>';
-            $result .= '<button class="rate" style="width:'.($this->Rating->getProductRating($product->id)*30).'px;" type="submit"></button>';
+            $result .= '<input type="hidden" name="product" value="'.$product->name.'">';
+            $result .= '<button class="rate" style="width:'.($this->Rating->getProductRating($product->id)*30).'px;" type="button"></button>';
             if($this->Rating->notRated($product->id)) {
                 $result .= '<div>';
                 $result .= '    Rate: ';
-                $result .= '    <select name="rate">';
-                // $result .= '        <option value="0"> - </option>';
+                $result .= '    <select name="rate" class="rate-options" id="rate_'.$product->id.'">';
+                $result .= '        <option value="0"> - </option>';
                 $result .= '        <option value="1"> 1 </option>';
                 $result .= '        <option value="2"> 2 </option>';
                 $result .= '        <option value="3"> 3 </option>';

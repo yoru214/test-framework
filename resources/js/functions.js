@@ -300,21 +300,21 @@ function loadJSON(path, success, error)
     xhr.open("GET", path, true);
     xhr.send();
 }
-function loadRate()
+
+function rateProduct(form)
 {
-    var elements =document.getElementsByClassName('rate-product'); 
-    for(i=0;i<elements.length;i++)
+    var data = new FormData(form);
+    if(data.get('rate') == 0 || data.get('rate') == null)
     {
-        elements[i].addEventListener("submit",function(event){
-            var data = new FormData(elements[i]);
-
-            if(data.get('rate') == 0)
-            {
-                event.preventDefault();
-                alert("You had to select rating from 1 to 5.");
-            }
-
-        });
+        alert("You had to select rating from 1 to 5.");
     }
+    else
+    {
+        if(confirm("You are about to rate " + data.get('product') + " with " + data.get('rate') + ".\n\n Do you wish to proceed?" ))
+        {
+            return true;
+        }
 
+    }
+    return false;
 }
