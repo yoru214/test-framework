@@ -9,7 +9,7 @@
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/yoru214/test-framework
  */
-
+namespace Model;
 /**
  * AppModel Class
  * PHP Version 7.2.10
@@ -20,8 +20,6 @@
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     https://github.com/yoru214/test-framework
  */
-
-namespace Model;
 class AppModel extends \Library\Model
 {
     
