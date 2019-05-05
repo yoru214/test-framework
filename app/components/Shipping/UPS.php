@@ -75,7 +75,8 @@ implements \Library\Interfaces\ProcessShippingInterface,
         $res = $db->result($sql);
 
         $row=mysqli_fetch_object($res);
-        if ($row->funds >= 0) {
+        if ($row->funds >= 0)
+        {
 
             $sql = "INSERT INTO purchases ";
             $sql .= "(customer_id,product_id,quantity,price,shipping) ";
@@ -94,7 +95,9 @@ implements \Library\Interfaces\ProcessShippingInterface,
 
             $this->shippingFee($shippingRow, $db);
             
-        } else {
+        }
+        else
+        {
             $return = array("CODE"=>"0","MESSAGE"=>"Insufficient Funds!");
         }
 

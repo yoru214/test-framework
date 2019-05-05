@@ -10,7 +10,8 @@
  * @link     https://github.com/yoru214/test-framework
  */
 declare(strict_types=1);
-if (session_status() == PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE)
+{
     session_start();
 }
 

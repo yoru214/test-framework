@@ -17,10 +17,12 @@ spl_autoload_register(
 
         $classFile = $segments[count($segments)-1];
 
-        if (substr($classFile, -7) == "_Config") {
+        if (substr($classFile, -7) == "_Config")
+        {
             $path = APP . '/config/';
             $path .= strtolower(str_replace("_Config", "", $classFile)) . '.php';
-            if (file_exists($path)) {
+            if (file_exists($path))
+            {
                 include_once  $path;
             }
         } else if (substr($classFile, -8) == "Shipping") {
@@ -29,22 +31,32 @@ spl_autoload_register(
             if (file_exists($path)) {
                 include_once  $path;
             }
-        } else if (substr($classFile, -9) == "Interface") {
+        } 
+        else if (substr($classFile, -9) == "Interface")
+        {
             $path = LIB . '/Interfaces/Shipping/';
             $path .= str_replace("ShippingInterface", "", $classFile) . '.php';
 
-            if (file_exists($path)) {
+            if (file_exists($path))
+            {
                 include_once  $path;
             }
-        } else if (file_exists(APP . '/'. $classFile . '.php')) {
+        }
+        else if (file_exists(APP . '/'. $classFile . '.php'))
+        {
             include_once  APP . '/' . $classFile . '.php';
-        } else if (file_exists(LIB . '/' .$classFile . '.php')) {
+        } 
+        else if (file_exists(LIB . '/' .$classFile . '.php')) 
+        {
             include_once LIB . '/'  . $classFile . '.php';
-        } else if (file_exists(APP . '/controller/' .$classFile . '.php')) {
+        }
+        else if (file_exists(APP . '/controller/' .$classFile . '.php')) 
+        {
             include_once APP . '/controller/'  . $classFile . '.php';
         }
         
-        if (file_exists(APP . '/model/' .$classFile . '.php')) {
+        if (file_exists(APP . '/model/' .$classFile . '.php')) 
+        {
             include_once APP . '/model/'  . $classFile . '.php';
         }
     }

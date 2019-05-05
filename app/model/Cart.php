@@ -55,8 +55,10 @@ class Cart extends AppModel
         $total= 0.00;
         $qty=0;
         $funds = 0;
-        if ($result = $this->result($sql)) {
-            while ($row = mysqli_fetch_object($result)) {
+        if ($result = $this->result($sql))
+        {
+            while ($row = mysqli_fetch_object($result))
+            {
                 $items[] = $row;
                 $total += $row->subtotal;
                 $qty += $row->quantity;
@@ -89,12 +91,15 @@ class Cart extends AppModel
                                         )
                     );
         $res = $this->find($args);
-        if ($res==null) {
+        if ($res==null)
+        {
             $sql  = "Insert into carts ";
             $sql .= "(customer_id,product_id,quantity) ";
             $sql .= "values ";
             $sql .= "($customerID,".$cartData['product_id'].",".$cartData['qty'].")";
-        } else {
+        }
+        else
+        {
             $sql  = "UPDATE carts set quantity = ";
             $sql .= (intval($res->quantity) + intval($cartData['qty']));
             $sql .= " WHERE id = ".$res->id;
@@ -118,9 +123,12 @@ class Cart extends AppModel
                                        )
                     );
         $res = $this->find($args);
-        if ($res->quantity==1) {
+        if ($res->quantity==1)
+        {
             $sql = "delete from carts WHERE id = ".$res->id;
-        } else {
+        }
+        else
+        {
             $sql  = "UPDATE carts set quantity = " . (intval($res->quantity) - 1);
             $sql .= " WHERE id = ".$res->id;
         }

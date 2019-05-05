@@ -52,10 +52,13 @@ class Customer extends AppModel
         $result = $this->result($sql);
         
         $row = mysqli_fetch_object($result);
-        if (!isset($row->funds)) {
+        if (!isset($row->funds))
+        {
             $_SESSION['Auth'] = $this->add();
             $this->setFunds();
-        } else {
+        }
+        else
+        {
             $_SESSION['Auth']->funds = $row->funds;
         }
     }

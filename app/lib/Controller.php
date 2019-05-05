@@ -76,9 +76,12 @@ class Controller
      */
     public function segment(int $i) : ?String
     {
-        if (count($this->ROUTE_SEGMENTS)>($i-1)) {
+        if (count($this->ROUTE_SEGMENTS)>($i-1))
+        {
             return $this->ROUTE_SEGMENTS[$i];
-        } else {
+        } 
+        else
+        {
             return "";
         }
     }

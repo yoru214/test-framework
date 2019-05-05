@@ -55,9 +55,12 @@ class Rating extends AppModel
                                          )
                         );
         $res = $this->find($args);
-        if (isset($res)) {
+        if (isset($res))
+        {
             return false;
-        } else {
+        }
+        else
+        {
             $sql  = "insert into ratings ";
             $sql .= "(rate, product_id, user_id, ratedatetime) ";
             $sql .= "values ";

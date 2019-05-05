@@ -54,9 +54,8 @@ implements \Library\Interfaces\ProcessShippingInterface
         $res = $db->result($sql);
 
         $row=mysqli_fetch_object($res);
-        if ($row->funds >= 0) {
-
-
+        if ($row->funds >= 0)
+        {
             $sql = "INSERT INTO purchases ";
             $sql .= "(customer_id,product_id,quantity,price,shipping) ";
             $sql .= "SELECT c.customer_id,c.product_id,c.quantity, p.`price`, ";
@@ -71,7 +70,9 @@ implements \Library\Interfaces\ProcessShippingInterface
             $sql = "DELETE from carts where customer_id = ". $_SESSION['Auth']->id;
             $db->query($sql);
 
-        } else {
+        }
+        else
+        {
             $return = array("CODE"=>"0","MESSAGE"=>"Insufficient Funds!");
         }
 

@@ -66,7 +66,8 @@ class Model
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
 
-        if ($ConnectionStatus["CODE"]=="1") {
+        if ($ConnectionStatus["CODE"]=="1")
+        {
             $where = "";
             if (count($arguments)>0) {
                 if (isset($arguments['conditions'])) {
@@ -81,7 +82,9 @@ class Model
             }
 
             return $object;
-        } else {
+        }
+        else
+        {
             $this->ERROR_MESSAGE = $ConnectionStatus['MESSAGE'];
             return null;
         }
@@ -98,7 +101,8 @@ class Model
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
 
-        if ($ConnectionStatus["CODE"]=="1") {
+        if ($ConnectionStatus["CODE"]=="1")
+        {
             $sql = "select * from " . $this->TABLE;
             $where = "";
             if (count($arguments)>0) {
@@ -122,7 +126,9 @@ class Model
 
             $result = $this->DBConnection->result($sql);
             return mysqli_fetch_object($result);
-        } else {
+        }
+        else
+        {
             $this->ERROR_MESSAGE = $ConnectionStatus['MESSAGE'];
             return null;
         }
@@ -166,9 +172,12 @@ class Model
     {
         $lastChar = substr($string, -1);
 
-        if ($lastChar == "s") {
+        if ($lastChar == "s")
+        {
             $string .= "ses";
-        } else {
+        }
+        else
+        {
             $string .= "s";
         }
         $segments = explode("\\", $string);

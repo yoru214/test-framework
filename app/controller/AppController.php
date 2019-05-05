@@ -31,13 +31,15 @@ class AppController extends \Library\Controller
     {   
         $this->loadModel('Customer');
         $this->loadModel('Shipping');
-        if (!isset($_SESSION['Auth'])) {
+        if (!isset($_SESSION['Auth']))
+        {
             $_SESSION['Auth'] = $this->Customer->add();
         }
         $this->Customer->setFunds();
         $shippings = $this->Shipping->findAll();
         $shippingHTML = "";
-        foreach ($shippings as $shipping) {
+        foreach ($shippings as $shipping)
+        {
             $shippingHTML .= '<input type="radio" name="shipping" value="';
             $shippingHTML .= $shipping->id.'" /> ';
             $shippingHTML .= $shipping->description;

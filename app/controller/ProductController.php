@@ -34,7 +34,8 @@ class ProductController extends AppController
         $this->loadModel("Product");
         $this->loadModel("Rating");
 
-        if (isset($_POST['rating'])) {
+        if (isset($_POST['rating']))
+        {
             $this->Rating->rateProduct($_POST['product_id'], $_POST['rate']);
            
         }
@@ -52,7 +53,8 @@ class ProductController extends AppController
 
         $result = "";
 
-        foreach ($products as $product) {
+        foreach ($products as $product)
+        {
             $result .= '<li class="col-3">';
             $result .= '<img src="'.$product->image.'" alt="'.$product->name.'" />';
             $result .= '<div class="rating">';
@@ -144,7 +146,8 @@ class ProductController extends AppController
         $Rating = $this->Rating->getProductRating($product->id);
 
         $ratingHTML ="";
-        if ($this->Rating->notRated($product->id)) {
+        if ($this->Rating->notRated($product->id))
+        {
             $ratingHTML  = '<div>';
             $ratingHTML .= '    Rate: ';
             $ratingHTML .= '    <select name="rate">';

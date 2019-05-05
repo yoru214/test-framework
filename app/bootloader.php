@@ -52,16 +52,21 @@ class Bootloader
      */
     public function initialize(array $config) : void
     {
-        if (isset($_GET['route']) && $_GET['route']!='') {
+        if (isset($_GET['route']) && $_GET['route']!='') 
+        {
             $this->segment = explode('/', ltrim(rtrim($_GET['route'], '/'), '/'));
-            if (count($this->segment)<2) {
+            if (count($this->segment)<2) 
+            {
                 $this->segment[1]='index';
             }
-        } else {
+        }
+        else
+        {
             $this->segment[0] = $config['routes']['default']['controller'];
             $this->segment[1] = $config['routes']['default']['action'];
 
-            if (!isset($this->segment[1])) {
+            if (!isset($this->segment[1]))
+            {
                 $this->segment[1]="index";
             }
         }
@@ -85,18 +90,22 @@ class Bootloader
 
         $Controller->beforeFilter();
 
-        if (isset($this->route['action'])) {
+        if (isset($this->route['action']))
+        {
             $Action="".$this->segment[1];
             $Controller->$Action();
 
             
-        } else {
+        }
+        else
+        {
             $Controller->index();
         }
 
         $this->defineVariables($Controller);
 
-        if ($Controller->VIEW) {
+        if ($Controller->VIEW)
+        {
             $this->loadView();
             $this->loadLayout();
             $this->setViewVariables();
@@ -113,9 +122,12 @@ class Bootloader
      */
     public function defineVariables(Object $Controller) : void
     {
-        if (isset($Controller->PAGE_TITLE)) {
+        if (isset($Controller->PAGE_TITLE))
+        {
             $this->PAGE_TITLE = $Controller->PAGE_TITLE;
-        } else {
+        } 
+        else
+        {
             $this->PAGE_TITLE = ucfirst($this->route['controller']);
             if (isset($this->route['action'])) {
                 $this->PAGE_TITLE .= " &middot; " . ucfirst($this->route['action']);
@@ -140,9 +152,12 @@ class Bootloader
         $ViewFilePATH = APP . '/view/Layout/Segments/sidebar.html';
         $ViewFile = fopen($ViewFilePATH, "r");
         $filesize = filesize($ViewFilePATH);
-        if ($filesize == 0) {
+        if ($filesize == 0)
+        {
             $this->SIDEBAR_CONTENT = "";
-        } else {
+        }
+        else
+        {
             $this->SIDEBAR_CONTENT = fread($ViewFile, filesize($ViewFilePATH));
         }
     }
@@ -181,18 +196,24 @@ class Bootloader
     {
         $ViewFilePATH = APP . '/view/' . ucfirst($this->route['controller']);
         $ViewFilePATH .= '/'.$this->route['action'].'.html';
-        if (file_exists($ViewFilePATH)) {
+        if (file_exists($ViewFilePATH))
+        {
             $ViewFile = fopen($ViewFilePATH, "r");
             $filesize = filesize($ViewFilePATH);
-            if ($filesize == 0) {
+            if ($filesize == 0)
+            {
                 $this->PAGE_CONTENT = "";
-            } else {
+            }
+            else
+            {
                 $this->PAGE_CONTENT = fread($ViewFile, filesize($ViewFilePATH));
             }
             
             
             
-        } else {
+        }
+        else
+        {
             die("ERROR: View file \"{$this->route['action']}.html\" not found.");
         }
     }
@@ -203,8 +224,10 @@ class Bootloader
      */
     public function setViewVariables() : void
     {
-        if (isset($this->VIEW_VARIABLES)) {
-            foreach ($this->VIEW_VARIABLES as $variable => $value) {
+        if (isset($this->VIEW_VARIABLES))
+        {
+            foreach ($this->VIEW_VARIABLES as $variable => $value)
+            {
                 $this->PAGE_CONTENT 
                     = str_replace(
                         "{{".$variable."}}",
