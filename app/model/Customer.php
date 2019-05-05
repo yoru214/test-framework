@@ -50,8 +50,14 @@ class Customer extends AppModel
         $sql .= "LEFT JOIN purchases p ON p.`customer_id` = c.id  ";
         $sql .= "WHERE c.id = " . $_SESSION['Auth']->id;
         $result = $this->result($sql);
+        
         $row = mysqli_fetch_object($result);
-        $_SESSION['Auth']->funds = $row->funds;
+        if (!isset($row->funds)) {
+            $_SESSION['Auth'] = $this->add();
+            $this->setFunds();
+        } else {
+            $_SESSION['Auth']->funds = $row->funds;
+        }
     }
     /**
      * Function that generates random person name.

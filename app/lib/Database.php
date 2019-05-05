@@ -89,7 +89,9 @@ class Database
                 $this->password, 
                 $this->database
             );
-        return $this->DBConnection->query($queryString);
+        $return = $this->DBConnection->query($queryString);
+
+        return is_bool($return)? null : $return;
     }
     
     /**
