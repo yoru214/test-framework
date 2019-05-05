@@ -12,6 +12,19 @@ spl_autoload_register (
                 include_once  $path;
             }
         }
+        else if (substr($classFile, -8) == "Shipping") {
+            $path = APP . '/components/Shipping/'. strtolower(str_replace("Shipping", "", $classFile)) . '.php';
+            if (file_exists($path)) {
+                include_once  $path;
+            }
+        }
+        else if (substr($classFile, -9) == "Interface") {
+            $path = LIB . '/Interfaces/Shipping/'. str_replace("ShippingInterface", "", $classFile) . '.php';
+
+            if (file_exists($path)) {
+                include_once  $path;
+            }
+        }
         else if(file_exists(APP . '/'. $classFile . '.php')) {
             include_once  APP . '/' . $classFile . '.php';
         }
@@ -21,7 +34,8 @@ spl_autoload_register (
         else if(file_exists(APP . '/controller/' .$classFile . '.php')) {
             include_once APP . '/controller/'  . $classFile . '.php';
         }
-        else if(file_exists(APP . '/model/' .$classFile . '.php')) {
+        
+        if(file_exists(APP . '/model/' .$classFile . '.php')) {
             include_once APP . '/model/'  . $classFile . '.php';
         }
     }

@@ -23,6 +23,11 @@ class Model
         $this->CONFIG = $config['database'];
     }
 
+    public function getDatabaseConnection() : ?object
+    {
+        return new Database($this->DB);
+    }
+
     function findAll(array $arguments = array()) : ?array
     {
         $this->DBConnection =  new Database($this->DB);
@@ -119,6 +124,13 @@ class Model
         $segments = explode("\\", $string);
 
         return $segments[count($segments)-1];
+    }
+    
+
+    function loadModel(String $ModelName,String $ModelClass=null)
+    {
+        $ModelNameSpace = "\\Model\\".$ModelName;
+        $this->$ModelName = new $ModelNameSpace();
     }
 }
 

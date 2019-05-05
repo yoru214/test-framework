@@ -31,6 +31,8 @@ class Purchase extends AppModel
      */
     function purchaseFromCart(String $shipping) : ?array
     {
+        $this->loadModel('Shipping');
+
         $return = array("CODE"=>"1","MESSAGE"=>"Purchase Successful!");
 
         $sql = "SELECT ";
@@ -45,21 +47,13 @@ class Purchase extends AppModel
 
         $row=mysqli_fetch_object($result);
 
-        if ($row->funds >= 0) {
+        $condition = array(
+                        'conditions' => array('id'=>$shipping)
+                        );
+        $shipingDetails = $this->Shipping->find($condition);
 
-            $sql = "INSERT INTO purchases ";
-            $sql .= "SELECT c.*, p.`price`, ".$shipping." as 'shipping' ";
-            $sql .= "FROM carts c ";
-            $sql .= "INNER JOIN products p ON p.`id` = c.product_id ";
-            $sql .= "WHERE ";
-            $sql .= "c.customer_id = " . $_SESSION['Auth']->id;
-
-            $this->query($sql);
-            $sql = "DELETE from carts where customer_id = ". $_SESSION['Auth']->id;
-            $this->query($sql);
-        } else {
-            $return = array("CODE"=>"0","MESSAGE"=>"Insufficient Funds!");
-        }
-        return $return;
+        $componentClass = "\\Components\\Shipping\\".$shipingDetails->component_class;
+        $componentShipping = new $componentClass();
+        return $componentShipping->process($_SESSION['Auth']->id, $this->getDatabaseConnection(), $shipping);
     }
 }
