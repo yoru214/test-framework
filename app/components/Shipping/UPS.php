@@ -33,7 +33,7 @@ implements \Library\Interfaces\ProcessShippingInterface,
      * 
      * @return void
      */
-    public function shippingFee(object $shippingDetails,object $db) : void
+    public function shippingFee($shippingDetails,$db)
     {
         $sql = "INSERT INTO purchases ";
         $sql .= "(customer_id,product_id,quantity,price,shipping) ";
@@ -55,7 +55,7 @@ implements \Library\Interfaces\ProcessShippingInterface,
      * 
      * @return array Returns CODE=>1 if successfull.
      */
-    public function process(int $id,object $db,int $shippingID) : array
+    public function process($id,$db,$shippingID)
     {
         $result=array("CODE"=>1,"MESSAGE"=>"Purchase Successful");
 

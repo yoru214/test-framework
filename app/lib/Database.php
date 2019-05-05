@@ -22,11 +22,11 @@ namespace Library;
  */
 class Database
 {
-    private $_host;
-    private $_username;
-    private $_password;
-    private $_database;
-    private $_port = '3306';
+    private $host;
+    private $username;
+    private $password;
+    private $database;
+    private $port = '3306';
 
     private $_DBConnection;
 
@@ -36,16 +36,23 @@ class Database
      *
      * @param String $connection String connection based on Config Class.
      */
-    public function __construct(String $connection = "default")
+    public function __construct($connection = null)
     {
+        if($connection == null)
+        {
+            $connection = "default";
+        }
         $dbConfig = new \Config\Database_Config();
 
-        $this->host=$dbConfig->$connection['host'];
-        $this->username=$dbConfig->$connection['username'];
-        $this->password=$dbConfig->$connection['password'];
-        $this->database=$dbConfig->$connection['database'];
-        if (isset($dbConfig->$connection['port'])) {
-            $this->port=$dbConfig->$connection['port'];
+        $conf =$dbConfig->$connection;
+
+        $this->host=$conf['host'];
+        $this->username=$conf['username'];
+        $this->password=$conf['password'];
+        $this->database=$conf['database'];
+        if (isset($conf['port'])) 
+        {
+            $this->port=$conf['port'];
         }
 
         echo "";
@@ -80,7 +87,7 @@ class Database
      * 
      * @return object|null Mysql Fetch Ob ject or null if error.
      */
-    public function result(String $queryString) : ?object
+    public function result($queryString)
     {
         $this->DBConnection 
             = new \mysqli(
@@ -101,7 +108,7 @@ class Database
      * 
      * @return void
      */
-    public function query(String $queryString) : void
+    public function query($queryString)
     {
         $this->DBConnection 
             = new \mysqli(

@@ -29,7 +29,7 @@ class Purchase extends AppModel
      * 
      * @return array $array['CODE']=1 if succesful.
      */
-    public function purchaseFromCart(String $shipping) : ?array
+    public function purchaseFromCart($shipping)
     {
         $this->loadModel('Shipping');
 

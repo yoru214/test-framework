@@ -27,7 +27,7 @@ class RatingsController extends AppController
      *
      * @return void
      */
-    public function index() : void
+    public function index()
     {
         $this->PAGE_TITLE = "Ratings";
     }
@@ -36,7 +36,7 @@ class RatingsController extends AppController
      *
      * @return void
      */
-    public function view() : void
+    public function view()
     {
         $this->PAGE_TITLE = "Product rating";
     }

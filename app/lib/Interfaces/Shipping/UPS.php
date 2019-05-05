@@ -30,6 +30,6 @@ interface UPSShippingInterface
      * 
      * @return void
      */
-    public function shippingFee(object $shippingDetails,object $db) : void;
+    public function shippingFee($shippingDetails,$db);
 
 }

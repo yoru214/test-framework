@@ -50,7 +50,7 @@ class Model
      *
      * @return object|null
      */
-    public function getDatabaseConnection() : ?object
+    public function getDatabaseConnection() 
     {
         return new Database($this->DB);
     }
@@ -61,7 +61,7 @@ class Model
      * 
      * @return array|null returns null if there is an error array if sucessful
      */
-    public function findAll(array $arguments = array()) : ?array
+    public function findAll(array $arguments = array())
     {
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -96,7 +96,7 @@ class Model
      * 
      * @return object|null  returns null if there is an error array if sucessful
      */
-    public function find(array $arguments = array()) : ?object
+    public function find(array $arguments = array())
     {
         $this->DBConnection =  new Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -140,7 +140,7 @@ class Model
      * 
      * @return object|null returns null for error and object if sucess.
      */
-    public function result(String $sqlQuery) : ?object
+    public function result($sqlQuery)
     {
         $this->DBConnection =  new \Library\Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -154,7 +154,7 @@ class Model
      * 
      * @return void
      */
-    public function query(String $sqlQuery) : void
+    public function query($sqlQuery)
     {
         $this->DBConnection =  new \Library\Database($this->DB);
         $ConnectionStatus = $this->DBConnection->connect();
@@ -168,7 +168,7 @@ class Model
      * 
      * @return String
      */
-    public function pluralize(String $string) : String
+    public function pluralize($string)
     {
         $lastChar = substr($string, -1);
 
@@ -193,7 +193,7 @@ class Model
      * 
      * @return void
      */
-    public function loadModel(String $ModelName,String $ModelClass=null) : void
+    public function loadModel($ModelName,$ModelClass=null)
     {
         $ModelNameSpace = "\\Model\\".$ModelName;
         $this->$ModelName = new $ModelNameSpace();

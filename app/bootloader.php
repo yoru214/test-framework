@@ -50,7 +50,7 @@ class Bootloader
      * 
      * @return void
      */
-    public function initialize(array $config) : void
+    public function initialize($config)
     {
         if (isset($_GET['route']) && $_GET['route']!='') 
         {
@@ -81,7 +81,7 @@ class Bootloader
      *
      * @return void
      */
-    public function loadController() : void
+    public function loadController()
     {
         $ControllerClass  = "\\Controller\\";
         $ControllerClass .= ucfirst($this->route['controller']).'Controller';
@@ -120,7 +120,7 @@ class Bootloader
      * 
      * @return void
      */
-    public function defineVariables(Object $Controller) : void
+    public function defineVariables($Controller)
     {
         if (isset($Controller->PAGE_TITLE))
         {
@@ -142,7 +142,7 @@ class Bootloader
      *
      * @return void
      */
-    public function loadLayout() : void
+    public function loadLayout()
     {
         $ViewFilePATH = APP . '/view/Layout/default.html';
         $ViewFile = fopen($ViewFilePATH, "r");
@@ -166,7 +166,7 @@ class Bootloader
      *
      * @return void
      */
-    public function setLayoutVariables() : void
+    public function setLayoutVariables()
     {
         $this->Layout 
             = str_replace(
@@ -192,7 +192,7 @@ class Bootloader
      *
      * @return void
      */
-    public function loadView() : void
+    public function loadView()
     {
         $ViewFilePATH = APP . '/view/' . ucfirst($this->route['controller']);
         $ViewFilePATH .= '/'.$this->route['action'].'.html';
@@ -222,7 +222,7 @@ class Bootloader
      *
      * @return void
      */
-    public function setViewVariables() : void
+    public function setViewVariables()
     {
         if (isset($this->VIEW_VARIABLES))
         {
@@ -248,7 +248,7 @@ class Bootloader
      *
      * @return void
      */
-    public function displayLayout() : void
+    public function displayLayout()
     {
         echo $this->Layout;
     }

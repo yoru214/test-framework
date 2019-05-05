@@ -31,5 +31,5 @@ interface ProcessShippingInterface
      * 
      * @return array result in array, CODE 1 if sucess 2 if failed.
      */
-    public function process(int $id,object $db,int $shippingID) : array;
+    public function process($id,$db,$shippingID);
 }

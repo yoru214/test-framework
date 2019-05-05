@@ -27,7 +27,7 @@ class AppController extends \Library\Controller
      *
      * @return void
      */
-    public function beforeFilter() : void
+    public function beforeFilter()
     {   
         $this->loadModel('Customer');
         $this->loadModel('Shipping');
@@ -55,7 +55,7 @@ class AppController extends \Library\Controller
      *
      * @return void
      */
-    public function afterFilter() : void
+    public function afterFilter()
     {
 
     }

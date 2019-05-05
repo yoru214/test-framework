@@ -27,7 +27,7 @@ class PurchaseController extends AppController
      *
      * @return void
      */
-    public function beforeFilter() : void
+    public function beforeFilter()
     {
         parent::beforeFilter();
         $this->loadModel('Cart');
@@ -39,7 +39,7 @@ class PurchaseController extends AppController
      *
      * @return void
      */
-    public function index() : void
+    public function index()
     {
         $this->PAGE_TITLE = "Purchases";
     }
@@ -49,7 +49,7 @@ class PurchaseController extends AppController
      *
      * @return void
      */
-    public function view() : void
+    public function view() 
     {
         $this->PAGE_TITLE = "Product rating";
     }
@@ -59,7 +59,7 @@ class PurchaseController extends AppController
      *
      * @return void
      */
-    public function addToCart() : void
+    public function addToCart()
     {
         $this->VIEW = false;
         $this->Cart->addToCart($_SESSION['Auth']->id, $_POST);
@@ -69,7 +69,7 @@ class PurchaseController extends AppController
      *
      * @return void
      */
-    public function removeFromCart() : void
+    public function removeFromCart()
     {
         $this->VIEW = false;
         $this->Cart->removeFromCart($_SESSION['Auth']->id, $_POST);
@@ -79,7 +79,7 @@ class PurchaseController extends AppController
      *
      * @return void
      */
-    public function checkout() : void
+    public function checkout()
     {
         $this->VIEW = false;
         echo json_encode($this->Purchase->purchaseFromCart($_POST['shipping']));

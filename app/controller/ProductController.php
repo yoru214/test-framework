@@ -28,7 +28,7 @@ class ProductController extends AppController
      *
      * @return void
      */
-    public function beforeFilter() : void
+    public function beforeFilter()
     {
         parent::beforeFilter();
         $this->loadModel("Product");
@@ -45,7 +45,7 @@ class ProductController extends AppController
      *
      * @return void
      */
-    public function index() : void
+    public function index()
     {
         $this->PAGE_TITLE = "MyStore";
 
@@ -136,7 +136,7 @@ class ProductController extends AppController
      *
      * @return void
      */
-    public function view() : void
+    public function view()
     {
         $arg = array('conditions'=>array('id'=>$this->segment(2)));
         $product = $this->Product->find($arg);

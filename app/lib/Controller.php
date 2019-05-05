@@ -37,7 +37,7 @@ class Controller
      * 
      * @return void
      */
-    public function loadModel(String $ModelName,String $ModelClass=null) : void
+    public function loadModel($ModelName,$ModelClass=null)
     {
         $ModelNameSpace = "\\Model\\".$ModelName;
         $this->$ModelName = new $ModelNameSpace();
@@ -49,8 +49,12 @@ class Controller
      * 
      * @return void
      */
-    public function loadDatabase(String $name="default") : void
+    public function loadDatabase($name=null)
     {
+        if($name == null)
+        {
+            $name = "default";
+        }
         $dbConfig = new Database_Config();
         $this->db[$name]=$dbConfig->$name;
     }
@@ -62,7 +66,7 @@ class Controller
      * 
      * @return void
      */
-    public function set(String $name, String $value) : void
+    public function set($name, $value)
     {
         $this->VIEW_VARIABLES[$name]=$value;
     }
@@ -74,7 +78,7 @@ class Controller
      * 
      * @return String|null returns the segment string or null if empty
      */
-    public function segment(int $i) : ?String
+    public function segment(int $i)
     {
         if (count($this->ROUTE_SEGMENTS)>($i-1))
         {

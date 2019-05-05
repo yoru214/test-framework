@@ -29,7 +29,7 @@ class ProfileController extends AppController
      *
      * @return void
      */
-    public function index() : void
+    public function index()
     {
         $this->PAGE_TITLE = "Profile";
 
@@ -40,7 +40,7 @@ class ProfileController extends AppController
      *
      * @return void
      */
-    public function cart() : void
+    public function cart()
     {
         $this->VIEW = false;
         $this->loadModel('Cart');
@@ -53,7 +53,7 @@ class ProfileController extends AppController
      *
      * @return void
      */
-    public function logout() : void
+    public function logout()
     {
         $this->VIEW = false;
         unset($_SESSION['Auth']);
