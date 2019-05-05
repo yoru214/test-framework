@@ -27,7 +27,7 @@ spl_autoload_register(
             }
         } else if (substr($classFile, -8) == "Shipping") {
             $path = APP . '/components/Shipping/';
-            $path .= strtolower(str_replace("Shipping", "", $classFile)) . '.php';
+            $path .= str_replace("Shipping", "", $classFile) . '.php';
             if (file_exists($path)) {
                 include_once  $path;
             }

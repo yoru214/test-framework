@@ -98,7 +98,7 @@ implements \Library\Interfaces\ProcessShippingInterface,
         }
         else
         {
-            $return = array("CODE"=>"0","MESSAGE"=>"Insufficient Funds!");
+            $result = array("CODE"=>"0","MESSAGE"=>"Insufficient Funds!");
         }
 
         return $result;
