@@ -1,36 +1,85 @@
 <?php
+/**
+ * PurchaseController.php
+ * PHP Version 7.2.10
+ * 
+ * @category Controller
+ * @package  MyStore
+ * @author   Emmanuel Zerna <emzer214@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/yoru214/test-framework
+ */
 namespace Controller;
-
+/**
+ * PurchaseController Class
+ * PHP Version 7.2.10
+ * 
+ * @category Controller
+ * @package  MyStore
+ * @author   Emmanuel Zerna <emzer214@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/yoru214/test-framework
+ */
 class PurchaseController extends AppController
 {
-    function beforeFilter() : void
+    /**
+     * Function that is called before anything in this class.
+     *
+     * @return void
+     */
+    public function beforeFilter() : void
     {
         parent::beforeFilter();
         $this->loadModel('Cart');
         $this->loadModel('Purchase');
     }
-
-    function index() : void
+    
+    /**
+     * Index or main page of the Controller
+     *
+     * @return void
+     */
+    public function index() : void
     {
         $this->PAGE_TITLE = "Purchases";
     }
 
-    function view() : void
+    /**
+     * View Page of the Controller
+     *
+     * @return void
+     */
+    public function view() : void
     {
         $this->PAGE_TITLE = "Product rating";
     }
 
-    function addToCart() : void
+    /**
+     * Add to Cart link
+     *
+     * @return void
+     */
+    public function addToCart() : void
     {
         $this->VIEW = false;
         $this->Cart->addToCart($_SESSION['Auth']->id, $_POST);
     }
-    function removeFromCart() : void
+    /**
+     * Remove to Cart link
+     *
+     * @return void
+     */
+    public function removeFromCart() : void
     {
         $this->VIEW = false;
         $this->Cart->removeFromCart($_SESSION['Auth']->id, $_POST);
     }
-    function checkout() : void
+    /**
+     * Checkout Cart link
+     *
+     * @return void
+     */
+    public function checkout() : void
     {
         $this->VIEW = false;
         echo json_encode($this->Purchase->purchaseFromCart($_POST['shipping']));

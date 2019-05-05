@@ -29,7 +29,7 @@ class Cart extends AppModel
      * 
      * @return array list of items on the cart.
      */
-    function getCustomerCart(int $customerID) : ?array
+    public function getCustomerCart(int $customerID) : ?array
     {
         $sql 
             = "SELECT c.*, 
@@ -81,7 +81,7 @@ class Cart extends AppModel
      * 
      * @return void
      */
-    function addToCart(int $customerID,array $cartData) : void
+    public function addToCart(int $customerID,array $cartData) : void
     {
         $args = array(
                     "conditions"=>array("customer_id"=>$customerID,
@@ -110,7 +110,7 @@ class Cart extends AppModel
      * 
      * @return void
      */
-    function removeFromCart(int $customerID, array $cartData) : void
+    public function removeFromCart(int $customerID, array $cartData) : void
     {
         $args = array(
                     "conditions"=>array("customer_id"=>$customerID,

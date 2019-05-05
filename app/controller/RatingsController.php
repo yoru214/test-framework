@@ -1,25 +1,43 @@
 <?php
+/**
+ * RatingsController.php
+ * PHP Version 7.2.10
+ * 
+ * @category Controller
+ * @package  MyStore
+ * @author   Emmanuel Zerna <emzer214@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/yoru214/test-framework
+ */
 namespace Controller;
-
+/**
+ * RatingsController Class
+ * PHP Version 7.2.10
+ * 
+ * @category Controller
+ * @package  MyStore
+ * @author   Emmanuel Zerna <emzer214@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     https://github.com/yoru214/test-framework
+ */
 class RatingsController extends AppController
 {
-    function beforeFilter() : void
-    {
-        parent::beforeFilter();
-    }
-
-    function index() : void
+    /**
+     * Index or main page of the Controller
+     *
+     * @return void
+     */
+    public function index() : void
     {
         $this->PAGE_TITLE = "Ratings";
     }
-
-    function view() : void
+    /**
+     * View Page of the Controller
+     *
+     * @return void
+     */
+    public function view() : void
     {
         $this->PAGE_TITLE = "Product rating";
-    }
-
-    function add() : void
-    {
-        
     }
 }

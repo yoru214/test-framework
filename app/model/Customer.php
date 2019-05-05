@@ -27,7 +27,7 @@ class Customer extends AppModel
      *
      * @return object 
      */
-    function add() : object
+    public function add() : object
     {
         $name = $this->setname();
         $sql = "insert into customers (name) values('".$name."')";
@@ -41,7 +41,7 @@ class Customer extends AppModel
      *
      * @return void
      */
-    function setFunds() : void
+    public function setFunds() : void
     {
         $sql  = "SELECT ";
         $sql .= "c.id, ";
@@ -58,7 +58,7 @@ class Customer extends AppModel
      *
      * @return String random persons name
      */
-    function setName() : String
+    public function setName() : String
     {
         $strnames 
             = "Kathleen Weekly,

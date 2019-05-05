@@ -29,7 +29,7 @@ class Purchase extends AppModel
      * 
      * @return array $array['CODE']=1 if succesful.
      */
-    function purchaseFromCart(String $shipping) : ?array
+    public function purchaseFromCart(String $shipping) : ?array
     {
         $this->loadModel('Shipping');
 
@@ -52,8 +52,14 @@ class Purchase extends AppModel
                         );
         $shipingDetails = $this->Shipping->find($condition);
 
-        $componentClass = "\\Components\\Shipping\\".$shipingDetails->component_class;
+        $componentClass 
+            = "\\Components\\Shipping\\".$shipingDetails->component_class;
+            
         $componentShipping = new $componentClass();
-        return $componentShipping->process($_SESSION['Auth']->id, $this->getDatabaseConnection(), $shipping);
+        return $componentShipping->process(
+            $_SESSION['Auth']->id,
+            $this->getDatabaseConnection(),
+            $shipping
+        );
     }
 }

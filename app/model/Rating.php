@@ -29,7 +29,7 @@ class Rating extends AppModel
      * 
      * @return float Average rating of the Product 
      */
-    function getProductRating(int $productID) : float
+    public function getProductRating(int $productID) : float
     {
         $sql  = "SELECT ";
         $sql .= "CAST((IFNULL(AVG(rate),0)) AS DECIMAL(4,2)) AS 'RATE' ";
@@ -47,7 +47,7 @@ class Rating extends AppModel
      * 
      * @return boolean returns true if rating is sucessful.
      */
-    function rateProduct(int $productID,int $rating) : bool
+    public function rateProduct(int $productID,int $rating) : bool
     {
         $args = array(
                       'conditions'=>array('user_id'=>$_SESSION['Auth']->id,
@@ -73,7 +73,7 @@ class Rating extends AppModel
      * 
      * @return boolean returns true if user is still eligible to rate.
      */
-    function notRated(int $productID) : bool
+    public function notRated(int $productID) : bool
     {
         $args = array(
                     'conditions'=>array('user_id'=>$_SESSION['Auth']->id,
